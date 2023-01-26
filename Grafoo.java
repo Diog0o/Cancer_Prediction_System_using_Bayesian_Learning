@@ -37,110 +37,6 @@ public class Grafoo {
 		}
 	}
 	
-	/*
-	 * public int[] max_spanning_tree() {
-	 
-		//começar pelo no 0
-		//ver arestas e adicionar as possiveis 
-		// escolher a mais pesada entre as possiveis 
-		//retira-la das possiveis
-		//ir para esse no
-		//adicionar o no aos visitados
-		//repeat
-		int[] r = new int[this.dim -1];
-		//lista guardar os nos visitados
-		// lista guardar arestas visitadas
-		// lista de arestas possiveis, ordenadas por tamanho
-		//garantir que aresta possivel nao vai para no visitado
-		//funcao auxiliar para ver arestas (check)
-		// funcao auxiliar para escolher a mais pesada (check)
-		// ver se a mais pesada pode ser
-		// retirar a escolhida
-		
-		//lista de arestas
-		return r;
-	}
-	
-*/
-	
-	
-	
-
-	
-	/* public static void quickSort(ArrayList<Tuple> vec, int left, int right) { //do maior para o menor
-		int r;
-		if (right > left) {
-		r = partition(vec, left, right); 
-		quickSort(vec, left, r - 1); 
-		quickSort(vec, r + 1, right); 
-		} 
-		} 
-	
-	private static int partition(ArrayList<Tuple> vec, int left, int right) {
-		int i=left, j=left + 1;
-		while(j<=right) {
-			if (vec.get(j).weight>=vec.get(left).weight){
-				i++;
-				swap(vec,i,j);
-				
-				}
-			
-			j++;
-		}
-		swap(vec,left, i);
-		return i;
-		} 
-	
-	private static void swap(ArrayList<Tuple> vec,int a,int b) {
-		Tuple tmp = vec.get(a);
-		vec.set(a, vec.get(b));
-		vec.set(b, tmp);
-		
-		}
-	*/
-
-
-	
-	/* public ArrayList<Tuple> see_edges(int node) {
-		ArrayList<Tuple> r = new ArrayList<Tuple>();
-		double[] lista_nos=this.ma[node];
-		for (int i = 0; i< this.dim; i++) {
-			if(lista_nos[i]!=0) {
-				Tuple aresta = new Tuple();
-				aresta.weight = lista_nos[i];
-				aresta.o = node;
-				aresta.d = i;
-				r.add(aresta);
-			}
-		}
-		for(int i= 0; i<this.dim;i++) {
-			if (this.ma[i][node]!=0) {
-				Tuple aresta = new Tuple();
-				aresta.weight = lista_nos[i];
-				aresta.o = node;
-				aresta.d = i;
-				r.add(aresta);
-			}
-		}
-		return r;
-	}
-	
-	*/
-	
-	/*public Tuple fattest_edge(ArrayList<Tuple> lista_arestas) {
-		double w = 0;
-		Tuple res = new Tuple();
-		for (int i =0; i<lista_arestas.size() ; i++) {
-			if (lista_arestas.get(i).weight > w ) {
-				w=lista_arestas.get(i).weight;
-				res= lista_arestas.get(i);
-				
-			}
-		}
-		return res;
-	}
-	*/
-	
 	
 	 public int maxKey(double key[], Boolean mstSet[]){ 
 		 //int key  - lista com os pesos
@@ -179,49 +75,29 @@ public class Grafoo {
 	    	 key[i] = Integer.MIN_VALUE; //as entradas sao todas com - inf
 	         mstSet[i] = false; //ainda nao visitamos nenhum no
 	     }
-	 
-	        
-	     key[V-1] = 0; //pomos so que a aresta para chegar a classe e zero, para que, sendo este o valor maior, seja escolhido em primeiro lugar
-	     //e assim partimos da classe
-	     //como dissemos que e zero tambem nao estamos a cometer erro nenhum para depois (hopefully)
-	     
+	     key[V-1] = 0; 
 	     parent[V-1] = -1; // escolhemos o ultimo no (classe) como raiz
 	
-	     for (int count = 0; count < V - 1; count++) { //o ciclo so vai correr 10 vezes (so queremos passar por 10 nos)
-	    	 int u = maxKey(key, mstSet); //vamos sempre escolher o vertice ainda nao visitado que pode ser atingido pela aresta mais pesada
+	     for (int count = 0; count < V - 1; count++) {
+	    	 int u = maxKey(key, mstSet); 
 	 
 	         mstSet[u] = true; //ja o visitamos agora
 	 
 	         for (int v = 0; v < V; v++) {
-	        	 //chegamos agora a um novo no
-	        	 //queremos ver se ele se liga aos outros nos por arestas mais pesadas que os nos anteriores
-	        	 //vamos ver as arestas dele para cada no (ciclo for)
-	        	 //nao nos interessa atualizar as arestas para os nos que ja visitamos (dai o mstSet[v] == false)
-	 
-	                // graph[u][v] is non zero only for adjacent vertices of m
-	        	 
-	        	 
-	            if (u<v){ //na nossa implementacao, como o grafo nao e orientado, preenchemos apenas a metade superior da matriz
-	            	// ie, as arestas so estao representadas na entrada no no menor para o maior
-	            	//assim, se u<v, vamos ver a entrada [u][v]
-	            	
+	            if (u<v){
 	            	if (graph[u][v] != 0 && mstSet[v] == false && graph[u][v] > key[v]) {
-	            		//se o valor da aresta para o no v for superior ao valor da aresta que ja la esta, substituimos
-	            		//tornamos tambem u o pai de v, porque, por agora, vai ser a maneira de la chegar
-	            		
 		                parent[v] = u;
 		                key[v] = graph[u][v];
 		            }
 	            	}
 	            
 	            else {
-	            	//caso u>v, vamos ver a entrada [v][u], mas o principio e o mesmo
 	            	if (graph[v][u] != 0 && mstSet[v] == false && graph[v][u] > key[v]) {
 		                    parent[v] = u;
 		                    key[v] = graph[v][u];
 		                }
 	            	}
-	            	}
+	            }
 	                
 	            
 	        }
@@ -236,9 +112,9 @@ public class Grafoo {
 	     Forest res = new Forest(V);
 	     double key[] = new double[V];
 	     Boolean mstSet[] = new Boolean[V]; 
-	     for (int i = 0; i < V; i++) { //como as listas sao inicializadas a 0
-	    	 key[i] = Integer.MIN_VALUE; //as entradas sao todas com - inf
-	         mstSet[i] = false; //ainda nao visitamos nenhum no
+	     for (int i = 0; i < V; i++) {
+	    	 key[i] = Integer.MIN_VALUE; 
+	         mstSet[i] = false; 
 	     }
 	 
 	        
@@ -271,30 +147,11 @@ public class Grafoo {
 	        return res;
 	    }
 	 
-	 /*public void printMST(int parent[], int graph[][], int V)
-	    {
-	        System.out.println("Edge \tWeight");
-	        for (int i = 1; i < V; i++)
-	            System.out.println(parent[i] + " - " + i + "\t" + graph[i][parent[i]]);
-	    }
-	    
-	    */
-	
-
-	
-	/*public static void retira(ArrayList<Tuple> arestas, int pai) {
-		for (int i=0; i < arestas.size(); i++) {
-			if (arestas.get(i).d == pai) {
-				arestas.remove(i);
-			}
-		}
-	}
-	*/
 	
 	
 	public static double weight(Amostra amostra, int F, int P) {
 		int[] filhos = {F};
-		int f = amostra.domain(F); //f = numero de valores que Filho pode tomar
+		int f = amostra.domain(F);
 		int[] pai = {P};
 		int p = amostra.domain(P);
 		int[] var = {F,P};
@@ -302,7 +159,6 @@ public class Grafoo {
 		for (int x =0; x < f; x++) {
 			int[] valx = {x};
 			for (int y=0; y < p; y++) {
-				//queremos contar quantas vezes o filho e x e o pai e y
 				int[] val = {x,y};
 				int[] valy = {y};
 				double pbb_fora = amostra.count(var,val)/amostra.length(); 
