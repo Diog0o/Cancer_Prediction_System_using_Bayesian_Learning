@@ -66,32 +66,6 @@ public class Amostra implements Serializable{ //se calhar tirar o implements daq
 	}
 	
 	
-	/* public double count(int[] var, int[] val) {
-		double r = 0;
-		ArrayList<int[]> pos = new ArrayList<int[]>();
-		pos = this.list;
-		boolean[] visited = new boolean[pos.size()];
-		int i = 0;
-		
-		while (!pos.isEmpty() && i<var.length) {
-			for (int j = 0; j<pos.size() && !visited[j]; j++ ) { //PODE MELHORAR
-				if (pos.get(j)[var[i]] != val[i] ) {
-					visited[j] = true;
-				}
-			}
-			
-			i++;
-		}
-		
-		for (int k = 0; k<pos.size() ; k++) {
-			if (!visited[k]) {
-				r+=1;
-			}
-		}
-		return r;
-	}
-	
-	*/
 	
 	public double count(int[] var,int[] val) {
 		
@@ -132,26 +106,6 @@ public class Amostra implements Serializable{ //se calhar tirar o implements daq
 	}
 	
 	
-	/* public int domain (int [] posicoes) { 
-		ArrayList<int[]> pos = new ArrayList<int[]>();
-		// fazer com a transposta para ler as linhas
-		// recebe uma amostra??? ver slack
-		pos=this.list;
-		int res =1;
-		for (int i : posicoes) {
-			int maximo=0;
-			for (int j =0 ; j<pos.size(); j++) {
-				int e = pos.get(j)[posicoes[i]];
-				if (e>maximo) {
-					maximo=e;
-				}
-			}
-			res = res*(maximo+1);
-		}
-		return res;
-	}
-	*/
-	
 	public int domain (int posicao) {
 		int maximo=0;
 		for (int j =0 ; j< this.list.size(); j++) {
@@ -163,7 +117,7 @@ public class Amostra implements Serializable{ //se calhar tirar o implements daq
 		return maximo+1;
 	}
 	
-	// ve o primeiro elemento e diz o seu comprimento
+
 	
 	public int nr_var() {
 		if (this.length()>0) {
@@ -174,16 +128,6 @@ public class Amostra implements Serializable{ //se calhar tirar o implements daq
 		}
 	}
 	
-	
-	//salvaguarda: se tiver elementos, checka o primeiro e ve se tem o mm tamanho do que vamos adicionar
-	//se nao tiver elementos, adiciona so
-
-	
-	/*public boolean[] exp1(int a) {
-		boolean[] r = new boolean[a];
-		return r;
-	}
-	*/
 
 	
 	@Override
@@ -198,7 +142,7 @@ public class Amostra implements Serializable{ //se calhar tirar o implements daq
 		return " Amostra = " + s;
 	}
 	
-	public static boolean equals_aux2(double x, double y) { // outra opçao de escrita
+	public static boolean equals_aux2(double x, double y) { // outra opÃ§ao de escrita
 		double eps = 1e-10; //1*10^(-10)
 		return Math.abs(x-y)<eps;
 	}
